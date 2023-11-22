@@ -12,7 +12,7 @@ const ExerciseForm = () =>{
 
     const handleSubmit = async (e)=>{ // The function is async because we having a request here
         e.preventDefault() //to avoid refresh the page 
-        const exercise = {sentence,author};
+        const exercise = {title,sentence,author, breakfast};
         const response = await fetch('/api/exercises' , {
             method:'POST',
             body: JSON.stringify(exercise), // change the object into json

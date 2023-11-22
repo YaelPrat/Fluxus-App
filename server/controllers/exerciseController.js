@@ -30,7 +30,7 @@ const getExercise = async (req,res)=>{
 //Create a new exe
 
 const createExercise = async (req, res)=>{
-    const {sentence, author} = req.body;
+    const {title,sentence, author, breakfast} = req.body;
 
     let emptyFields= [];
     if(!sentence)
@@ -44,7 +44,7 @@ const createExercise = async (req, res)=>{
     if(emptyFields.length > 0) return res.status(400).json({error: 'יש למלא תרגיל ואת הכותב.ת',emptyFields})
     
     try{
-        const exercise = await Exercise.create({sentence, author});
+        const exercise = await Exercise.create({title,sentence, author,breakfast});
         res.status(200).json(exercise);
     }catch(error){
         res.status(400).json({error: error.message})
