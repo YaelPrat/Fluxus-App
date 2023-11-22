@@ -14,6 +14,7 @@ const ExerciseDetails = ({exercise}) =>{
 
     return(
         <div className="exercise-details">
+            <h3>{exercise.title}</h3>
             <h4>{exercise.sentence}</h4>
             <p>{exercise.author}</p>
             <span onClick={handelClick}>Delete</span>
