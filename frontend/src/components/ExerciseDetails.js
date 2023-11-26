@@ -11,8 +11,19 @@ const ExerciseDetails = ({exercise}) =>{
             dispatch({type:'DELETE_EXERCISE', payload: json})
         }
     }
-    const handelApproved = () => {
+    const handelApproved = async () => {
         console.log("dbg------ update the approved field");
+        const response = await fetch ('/api/exercises/'+ exercise._id,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ approved: true }),
+        });
+        const json = await response.json();
+        if(response.ok){
+            dispatch({type:'UPDATE_EXERCISE', payload: json})
+        }
     }
     return(
         <div className="exercise-details">

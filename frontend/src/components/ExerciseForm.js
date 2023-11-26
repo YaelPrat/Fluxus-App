@@ -34,7 +34,6 @@ const ExerciseForm = () =>{
         }
 
     }
-//TODO :  After change the schema i will add the rest of the fields 
     return(
         <form className="create" onSubmit={handleSubmit}>
             <h3><strong>תרגילי פלוקסוס לחיים אחרים</strong></h3>

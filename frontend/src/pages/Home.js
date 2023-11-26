@@ -30,7 +30,7 @@ const Home = ()=>{
    return (
     <div className="home">
         <div className="exercises">
-            {exercises && exercises.map((exercise)=>(
+            {exercises && exercises.filter(exercise => !exercise.approved).map((exercise)=>(
              <ExerciseDetails key= {exercise._id} exercise = {exercise}>
 
              </ExerciseDetails>
