@@ -59,7 +59,7 @@ const ExerciseForm = () =>{
                 className= {emptyFields.includes('author') ? 'error' :''}
             />
  
-            <label>?מה אכלת לארוחת הבוקר</label> 
+            <label>מה אכלת לארוחת הבוקר?</label> 
             <input
                 type="text"
                 onChange={(e)=> setBreakfast(e.target.value)}

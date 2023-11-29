@@ -10,6 +10,8 @@ body {
   background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
+  direction: rtl;
+  text-align: right;
 }
 header {
   background: #fff;
@@ -34,7 +36,7 @@ header a {
 
 .home {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  /* grid-template-columns: 3fr 1fr; */
   gap: 100px;
 }
 .exercise-details {
@@ -58,7 +60,7 @@ header a {
 .exercise-details span {
   position: absolute;
   top: 20px;
-  right: 20px;
+  left: 20px;
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
@@ -68,7 +70,7 @@ header a {
 .exercise-details button {
   position: absolute;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
