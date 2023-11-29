@@ -1,5 +1,8 @@
 const Exercise = require('../models/exerciseModel')
 const mongoose = require ('mongoose')
+const fs = require('fs');
+const path = require('path');
+
 //Get all exe
 const getExercises = async (req,res)=>{
     try {
@@ -84,11 +87,59 @@ const deleteExercise = async (req,res)=>{
         res.status(400).json({error: error.message})
     }
 }
+
+// const exportExercises= async(req, res) => {
+//     try {
+//         const exercises = await Exercise.find({}); // Fetch all exercises from your database
+
+//         // Create a file with the exercises data
+//         const filePath = path.join(__dirname, 'exercises-export.json');
+//         fs.writeFileSync(filePath, JSON.stringify(exercises,null,null));
+
+//         // Send the file to the client
+//         res.download(filePath, 'exercises-export.json', (err) => {
+//             // Delete the file after it's sent
+//             // fs.unlinkSync(filePath);
+//         });
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// }
+const exportExercises = async (req, res) => {
+    try {
+        const exercises = await Exercise.find({}); // Fetch all exercises from your database
+
+        // Create a file with the exercises data
+        const fileName = 'exercises-export.json';
+        const filePath = path.join(process.env.USERPROFILE, 'Downloads', fileName);
+        fs.writeFileSync(filePath, JSON.stringify(exercises, null, 2));
+
+        // Suggest the filename for the download
+        res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+        res.setHeader('Content-Type', 'application/json');
+
+        // Send the file to the client
+        res.download(filePath, fileName, (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ error: 'Internal server error.' });
+            }
+
+            // Delete the file after it's sent
+            // fs.unlinkSync(filePath);
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
+};
+
 module.exports = {
     createExercise,
     getExercises,
     getExercise,
     updateExercise,
-    deleteExercise
+    deleteExercise,
+    exportExercises
 }
 

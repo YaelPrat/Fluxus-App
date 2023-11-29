@@ -5,11 +5,14 @@ const {
     getExercises,
     getExercise,
     updateExercise,
-    deleteExercise
+    deleteExercise,
+    exportExercises
 } = require('../controllers/exerciseController')
 
 
 //GET All exercises
+router.get('/export-exercises', exportExercises)
+
 router.get('/',getExercises);
 
 router.get('/:id',getExercise)
