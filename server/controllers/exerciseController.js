@@ -134,12 +134,48 @@ const exportExercises = async (req, res) => {
     }
 };
 
+
+const printExercise = (req, res)=>{
+
+    try {
+        // Simulate printing by logging a message
+        console.log('Printing exercise:', req.body);
+    
+        res.status(200).json({ message: 'Exercise sent to the printer', exercise: req.body });
+      } catch (error) {
+        console.error('Error:', error.message);
+        res.status(500).json({ error: error.message });
+      }
+}
+
+const getRandomApprovedExercise = async (req,res)=>{
+    try {
+        // Fetch a random approved exercise from your database
+        const randomApprovedExercise = await Exercise.aggregate([
+          { $match: { approved: true } },
+          { $sample: { size: 1 } },
+        ]);
+    
+        if (randomApprovedExercise.length > 0) {
+          res.status(200).json(randomApprovedExercise[0]);
+        } else {
+          res.status(404).json({ error: 'No approved exercises found' });
+        }
+      } catch (error) {
+        console.error('Error in getRandomApprovedExercise:', error);
+
+        res.status(500).json({ error: error.message });
+      }
+}
+
 module.exports = {
     createExercise,
     getExercises,
     getExercise,
     updateExercise,
     deleteExercise,
-    exportExercises
+    exportExercises,
+    printExercise,
+    getRandomApprovedExercise
 }
 

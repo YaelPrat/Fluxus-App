@@ -6,12 +6,15 @@ const {
     getExercise,
     updateExercise,
     deleteExercise,
-    exportExercises
+    exportExercises, 
+    printExercise,
+    getRandomApprovedExercise
 } = require('../controllers/exerciseController')
 
 
 //GET All exercises
 router.get('/export-exercises', exportExercises)
+router.get('/random-approved', getRandomApprovedExercise);
 
 router.get('/',getExercises);
 
@@ -23,5 +26,7 @@ router.delete('/:id',deleteExercise)
 
 router.patch('/:id', updateExercise)
 
+
+router.post('/print',printExercise)
 module.exports = router
 
